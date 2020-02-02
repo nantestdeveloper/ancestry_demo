@@ -1,0 +1,49 @@
+<h1>Product </h1>
+<div class="tab">
+	<%Category.first.children.each do |children| %>
+    <button class="tablinks" onclick="openCity(event, '<%= children.name %>')"><%= children.name %></button>
+  <% end %>
+</div>
+<%Category.first.children.each do |children| %>
+	<div id="<%= children.name %>" class="tabcontent">
+	  <h3><%= children.name %></h3>
+	  <div class="container">
+	    <div class="row">
+	    	<% unless children.products.nil? %>
+		    	 <%children.products.each do |product| %>
+		        <div class="col-md-2">
+		            <div class="product-grid">
+		                <div class="product-image">
+		                    <a href="#">
+		                      <img class="pic-1 custom-product-image" src="http://bestjquery.com/tutorial/product-grid/demo9/images/img-1.jpg">
+		                    </a>
+		                </div>
+		                <div class="product-content">
+		                    <h3 class="title"><a href="#"><%=product.name%></a></h3>
+		                    <div class="price">$<%=product.price%>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		      <%end%>
+	      <%end%>
+	    </div>
+    </div>
+	</div>
+<%end%>
+<script>
+	function openCity(evt, cityName) {
+	  var i, tabcontent, tablinks;
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+	    tabcontent[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablinks");
+	  for (i = 0; i < tablinks.length; i++) {
+	    tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  }
+	  document.getElementById(cityName).style.display = "block";
+	  evt.currentTarget.className += " active";
+	}
+</script>
+
